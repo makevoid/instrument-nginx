@@ -5,3 +5,21 @@ services:
     image: makevoid/instrument-nginx
     build:
       context: nginx
+    depends_on:
+      - app
+    ports:
+      - 80:80
+  app:
+    image: makevoid/redis-app-sample1:latest
+    build:
+      context: app
+    environment:
+      RACK_ENV: production
+    depends_on:
+      - redis
+    ports:
+      - 3000
+  redis:
+    image: redis:6.0.9-alpine
+    ports:
+      - 6379
