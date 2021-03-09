@@ -32,6 +32,8 @@ then visit http://localhost
     cd spec
     bundle exec rake
 
+note: you have to have the environment running on compose (`docker-compose up --build`) for the specs to pass
+
 ### Contribute
 
 Open an issue or a pull request if you want to suggest or improve the project
