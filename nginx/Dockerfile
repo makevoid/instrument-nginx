@@ -65,6 +65,6 @@ RUN cd nginx-$NGINX_VERSION && ./configure \
 COPY nginx.conf /etc/nginx/
 
 VOLUME ["/var/cache/nginx"]
-EXPOSE 80 443
+EXPOSE 80
 
-CMD ["nginx"]
+CMD nginx -g 'daemon off;'

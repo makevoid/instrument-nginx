@@ -7,8 +7,10 @@ services:
       context: nginx
     depends_on:
       - app
+      - app_ws
     ports:
       - 80:80
+      - 81:81
   app:
     image: makevoid/redis-app-sample1:latest
     build:
@@ -23,3 +25,11 @@ services:
     image: redis:6.0.9-alpine
     ports:
       - 6379
+  app_ws:
+    image: makevoid/redis-app-ws-sample1:latest
+    build:
+      context: app_ws
+    environment:
+      RACK_ENV: production
+    ports:
+      - 3001:3001
