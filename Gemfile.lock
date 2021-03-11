@@ -3,18 +3,24 @@ GEM
   specs:
     diff-lcs (1.4.4)
     excon (0.79.0)
+    kontena-websocket-client (0.1.1)
+      websocket-driver (~> 0.6.5)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.2)
+    websocket-driver (0.6.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
   excon
+  kontena-websocket-client
   rspec-core
   rspec-expectations
 

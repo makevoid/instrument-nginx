@@ -16,7 +16,7 @@ end
 
 describe("Instrumented Nginx") {
 
-  it("haz status page") {
+  specify("status page enabled") {
     check = healthcheck
     check.should == { "status" => "OK"  }.to_json
 
@@ -39,8 +39,26 @@ describe("Instrumented Nginx") {
     stat_2.to_i.should == stat_1.to_i + 2
   }
 
-  # specify("status page enabled") { # better spec name :)
-  #   # ...
-  # }
+  specify("websocket app gets proxied") {
+
+    on_close = -> (close_code, _) {
+      close_code.should == 1000
+    }
+
+    url = "ws://localhost:81"
+
+    data = "test"
+
+    Kontena::Websocket::Client.connect(url) do |client|
+      client.send data
+      client.close 1000
+
+      client.read do |message|
+        message.should == "-> TEST"
+      end
+
+      on_close.(client.close_code, client.close_reason)
+    end
+  }
 
 }
