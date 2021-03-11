@@ -40,14 +40,13 @@ describe("Instrumented Nginx") {
   }
 
   specify("websocket app gets proxied") {
+    data = "test"
+
+    url = "ws://localhost:81"
 
     on_close = -> (close_code, _) {
       close_code.should == 1000
     }
-
-    url = "ws://localhost:81"
-
-    data = "test"
 
     Kontena::Websocket::Client.connect(url) do |client|
       client.send data
